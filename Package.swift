@@ -10,8 +10,10 @@ let package = Package(
     ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
+        
         .library(
             name: "EmbededPackage",
+            type: .dynamic,
             targets: ["EmbededPackage"]),
     ],
     dependencies: [
@@ -23,7 +25,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "EmbededPackage",
-            dependencies: []),
+            dependencies: [],
+            linkerSettings: [
+                LinkerSetting.linkedFramework("AsyncDisplayKit")
+            ]
+        ),
         .testTarget(
             name: "EmbededPackageTests",
             dependencies: ["EmbededPackage"]),
